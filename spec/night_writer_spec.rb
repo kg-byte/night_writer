@@ -23,8 +23,6 @@ RSpec.describe 'night_writer' do
             expect(cut_lines.count).to eq 2
             expect(cut_lines[0].length).to eq 40
             expect(cut_lines[1].length).to eq 10
-
-
           end
         end
     end
