@@ -39,13 +39,28 @@ attr_reader :hash
     end
 
     def translate
-      letters = @eng_message.split('')
-      letters.delete("\n")
-      letters.map {|letter| @hash[letter.to_sym]}
+      if @eng_message.count > 1
+        lines = @eng_message.map{|line| line.split('')}
+        braille = lines.map {|line| line.map {|letter| @hash[letter.to_sym]}}
+      else
+        letters = @eng_message[0].split('')
+        braille = letters.map {|letter| @hash[letter.to_sym]}
+      end
+      braille
     end
 
+
+    def cut_every_40_chars(input)
+      if input.length > 40
+        @eng_message = input.chars.each_slice(40).map(&:join)
+      else
+        @eng_message = [input]
+      end
+    end
+
+
     def convert(eng_message)
-      @eng_message = eng_message
+      cut_every_40_chars(eng_message.gsub("\n", ''))
       lines = Array.new
       braille_message = translate
       lines[0] = braille_message.flat_map{|letter|  letter[0]}.join
@@ -53,7 +68,5 @@ attr_reader :hash
       lines[2] = braille_message.flat_map{|letter|  letter[2]}.join
       lines
     end
-
-
 
 end
