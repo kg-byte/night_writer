@@ -38,7 +38,21 @@ attr_reader :hash
                 }
     end
 
+    def translate
+      letters = @eng_message.split('')
+      letters.delete("\n")
+      letters.map {|letter| @hash[letter.to_sym]}
+    end
 
+    def convert(eng_message)
+      @eng_message = eng_message
+      lines = Array.new
+      braille_message = translate
+      lines[0] = braille_message.flat_map{|letter|  letter[0]}.join
+      lines[1] = braille_message.flat_map{|letter|  letter[1]}.join
+      lines[2] = braille_message.flat_map{|letter|  letter[2]}.join
+      lines
+    end
 
 
 
