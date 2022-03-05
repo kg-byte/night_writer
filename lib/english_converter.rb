@@ -7,17 +7,15 @@ class EnglishConverter
       # require 'pry'; binding.pry
     end
 
-    # def translate(input)
-    #   if input.count > 1
-    #     lines = input.map{|line| line.split('')}
-    #     braille = lines.map {|line| line.map {|letter| @hash[letter.to_sym]}}
-    #   else
-    #     letters = input[0].split('')
-    #     braille = letters.map {|letter| @hash[letter.to_sym]}
-    #   end
-    #   braille
-    # end
+    def translate(input)
+        @dictionary[input].to_s
+    end
     #
+  #   if input.count > 1
+  # else
+  #   letters = input[0].split('')
+  #   braille = letters.map {|letter| @hash[letter.to_sym]}
+  # end
     #
     # def cut_every_40_chars(input)
     #   if input.length > 40

@@ -61,6 +61,10 @@ RSpec.describe 'night_writer' do
           expect(@english_converter).to be_a(EnglishConverter)
         end
 
+        it 'can translate braille to an English letter/word' do
+          expect(@english_converter.translate(["0.", "..", ".."])).to eq "a"
+          # expect(@english_converter.translate(["hello"])).to eq  [["0.", "00", ".."], ["0.", ".0", ".."], ["0.", "0.", "0."], ["0.", "0.", "0."], ["0.", ".0", "0."]]
+        end
 
 
 
