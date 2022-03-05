@@ -59,7 +59,6 @@ RSpec.describe 'night_writer' do
 
         it 'exists' do
           expect(@english_converter).to be_a(EnglishConverter)
-
         end
 
 
