@@ -21,4 +21,4 @@ else
                       }
 end
   braille_writer.close
-puts "Created 'braille.txt' containing #{eng_message.length} characters"
+puts "Created 'braille.txt' containing #{eng_message.length-1} characters"
