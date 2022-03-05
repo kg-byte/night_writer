@@ -1,5 +1,6 @@
 require_relative 'spec_helper'
 require_relative '../lib/braille_converter'
+require_relative '../lib/english_converter'
 
 RSpec.describe 'night_writer' do
 
@@ -50,9 +51,23 @@ RSpec.describe 'night_writer' do
         end
     end
 
+    context 'iteration 3' do
+        before(:each) do
+          @english_converter = EnglishConverter.new
+        end
+      describe EnglishConverter do
+
+        it 'exists' do
+          expect(@english_converter).to be_a(EnglishConverter)
+
+        end
 
 
 
 
 
+
+
+      end
+    end
 end

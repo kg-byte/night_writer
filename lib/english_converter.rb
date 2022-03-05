@@ -3,8 +3,8 @@ require_relative 'library'
 class EnglishConverter
     def initialize
       @_message = nil
-      @hash = Library.dictionary.invert
-      require 'pry'; binding.pry
+      @dictionary = Library.dictionary.invert
+      # require 'pry'; binding.pry
     end
 
     # def translate(input)

@@ -1,18 +1,18 @@
 require_relative 'library'
 class BrailleConverter
-attr_reader :hash
+attr_reader :dictionary
     def initialize
       @eng_message = nil
-      @hash = Library.dictionary
+      @dictionary = Library.dictionary
     end
 
     def translate(input)
       if input.count > 1
         lines = input.map{|line| line.split('')}
-        braille = lines.map {|line| line.map {|letter| @hash[letter.to_sym]}}
+        braille = lines.map {|line| line.map {|letter| @dictionary[letter.to_sym]}}
       else
         letters = input[0].split('')
-        braille = letters.map {|letter| @hash[letter.to_sym]}
+        braille = letters.map {|letter| @dictionary[letter.to_sym]}
       end
       braille
     end
