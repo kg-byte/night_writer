@@ -35,7 +35,7 @@ attr_reader :dictionary
       else
         output = output_braille_lines(translated_braille)
       end
-      output
+      output.join
     end
 
     def output_braille_one_line(line)
