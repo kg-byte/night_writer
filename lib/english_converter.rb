@@ -8,7 +8,14 @@ class EnglishConverter
     end
 
     def translate(input)
-        @dictionary[input].to_s
+      letters = []
+      # require 'pry'; binding.pry
+      if input.all? {|input| input.class == String}
+        letters << @dictionary[input].to_s
+      else
+        input.each{|letter| letters << @dictionary[letter].to_s}
+      end
+      letters.join
     end
     #
   #   if input.count > 1
