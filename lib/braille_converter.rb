@@ -62,7 +62,6 @@ attr_reader :hash
     def convert(eng_message)
       cut_every_40_chars(eng_message.gsub("\n", ''))
       translated_braille = translate
-      # require 'pry'; binding.pry
       if @eng_message.count == 1
         output = output_braille_one_line(translated_braille)
       else
@@ -80,7 +79,15 @@ attr_reader :hash
     end
 
     def output_braille_lines(lines)
-
-
+      multi_lines = Hash.new
+      i = 0
+      lines.each {|line|
+        i +=1
+        multi_lines[i.to_s] = [line.flat_map{|letter|  letter[0]}.join,
+                                 line.flat_map{|letter|  letter[1]}.join,
+                                 line.flat_map{|letter|  letter[2]}.join]
+      }
+      require 'pry'; binding.pry
+      multi_lines
     end
 end
