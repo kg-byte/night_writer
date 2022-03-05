@@ -79,15 +79,16 @@ attr_reader :hash
     end
 
     def output_braille_lines(lines)
-      multi_lines = Hash.new
+      multi_lines = Array.new
       i = 0
       lines.each {|line|
-        i +=1
-        multi_lines[i.to_s] = [line.flat_map{|letter|  letter[0]}.join,
+        i
+        multi_lines[i] = [line.flat_map{|letter|  letter[0]}.join,
                                  line.flat_map{|letter|  letter[1]}.join,
                                  line.flat_map{|letter|  letter[2]}.join]
+        i += 1
       }
-      require 'pry'; binding.pry
+      # require 'pry'; binding.pry
       multi_lines
     end
 end

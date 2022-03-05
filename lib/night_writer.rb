@@ -6,9 +6,12 @@ eng_reader.close
 braille_converter = BrailleConverter.new
 braille_message = braille_converter.convert(eng_message)
 braille_writer = File.open(ARGV[1], "w")
-braille_message.each {|line|
-  braille_writer.write(line)
+# require 'pry'; binding.pry
+braille_message.each{|line|
+  line.each {|row|
+  braille_writer.write(row)
   braille_writer.write("\n")
+            }
                     }
   braille_writer.close
 puts "Created 'braille.txt' containing #{eng_message.length} characters"
