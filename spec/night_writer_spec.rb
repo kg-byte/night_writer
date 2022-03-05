@@ -54,6 +54,7 @@ RSpec.describe 'night_writer' do
     context 'iteration 3' do
         before(:each) do
           @english_converter = EnglishConverter.new
+          @braille_converter = BrailleConverter.new
         end
       describe EnglishConverter do
 
@@ -67,7 +68,12 @@ RSpec.describe 'night_writer' do
           expect(hello).to eq "hello"
         end
 
-
+        it 'can combine braille if characgter length is over 40' do
+          multi_braille_lines = @braille_converter.convert("a"*41).flatten
+          combined_braille_lines = @english_converter.combine_braille_lines(multi_braille_lines)
+          expect(combined_braille_lines.count).to eq 3
+        end
+        # require 'pry'; binding.pry
 
 
 
