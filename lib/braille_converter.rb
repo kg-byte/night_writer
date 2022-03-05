@@ -2,7 +2,6 @@ require_relative 'library'
 class BrailleConverter
 attr_reader :dictionary
     def initialize
-      @eng_message = nil
       @dictionary = Library.dictionary
     end
 
@@ -20,17 +19,18 @@ attr_reader :dictionary
 
     def cut_every_40_chars(input)
       if input.length > 40
-        @eng_message = input.chars.each_slice(40).map(&:join)
+        reformated_eng = input.chars.each_slice(40).map(&:join)
       else
-        @eng_message = [input]
+        reformated_eng = [input]
       end
+      reformated_eng
     end
 
 
     def convert(eng_message)
-      cut_every_40_chars(eng_message.gsub("\n", ''))
-      translated_braille = translate(@eng_message)
-      if @eng_message.count == 1
+      reformated_eng = cut_every_40_chars(eng_message.gsub("\n", ''))
+      translated_braille = translate(reformated_eng)
+      if reformated_eng.count == 1
         output = output_braille_one_line(translated_braille)
       else
         output = output_braille_lines(translated_braille)

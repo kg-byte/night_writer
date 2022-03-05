@@ -75,7 +75,14 @@ RSpec.describe 'night_writer' do
         end
         # require 'pry'; binding.pry
 
+        it 'can convert braille to english letters regardless of length' do
+          forty_one_as = @braille_converter.convert("a"*41).flatten
+          expect(@english_converter.convert(forty_one_as)).to eq "a"*41
+          hello = @braille_converter.convert("hello")
+          expect(@english_converter.convert(hello)).to eq "hello"
 
+
+        end
 
 
       end
