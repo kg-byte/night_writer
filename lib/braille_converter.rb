@@ -35,6 +35,7 @@ attr_reader :dictionary
       else
         output = output_braille_lines(translated_braille)
       end
+      # require 'pry'; binding.pry
       output.join
     end
 
@@ -42,7 +43,7 @@ attr_reader :dictionary
       lines = Array.new
       lines[0] = line.flat_map{|letter|  letter[0]}.join
       lines[1] = line.flat_map{|letter|  letter[1]}.join
-      lines[2] = line.flat_map{|letter|  letter[2]}.join
+      lines[2] = line.flat_map{|letter|  letter[2]}.join 
       lines
     end
 
@@ -51,9 +52,9 @@ attr_reader :dictionary
       i = 0
       lines.each {|line|
         i
-        multi_lines[i] = [line.flat_map{|letter|  letter[0]}.join,
-                                 line.flat_map{|letter|  letter[1]}.join,
-                                 line.flat_map{|letter|  letter[2]}.join]
+        multi_lines[i] = [line.flat_map{|letter|  letter[0]}.join+"\n",
+                          line.flat_map{|letter|  letter[1]}.join+"\n",
+                          line.flat_map{|letter|  letter[2]}.join+"\n"]
         i += 1
       }
       # require 'pry'; binding.pry

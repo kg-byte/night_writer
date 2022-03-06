@@ -46,7 +46,7 @@ RSpec.describe 'night_writer' do
           it 'can convert a letter/word/sentence' do
             expect(@braille_converter.convert("a")).to eq  "0....."
             expect(@braille_converter.convert("hello!")).to eq "0.0.0.0.0...00.00.0..000....0.0.0.0."
-            expect(@braille_converter.convert("a"*41).length).to eq 246
+            expect(@braille_converter.convert("a"*41).length).to eq 252
           end
         end
     end
@@ -69,14 +69,14 @@ RSpec.describe 'night_writer' do
         end
 
         it 'can combine braille if characgter length is over 40' do
-          multi_braille_lines = @braille_converter.convert("a"*41)
+          multi_braille_lines = @braille_converter.convert("a"*41).split("\n")
           combined_braille_lines = @english_converter.combine_braille_lines(multi_braille_lines)
           expect(combined_braille_lines.count).to eq 3
         end
-        # require 'pry'; binding.pry
+
 
         it 'can convert braille to english letters regardless of length' do
-          forty_one_as = @braille_converter.convert("a"*41).flatten
+          forty_one_as = @braille_converter.convert("a"*41)
           expect(@english_converter.convert(forty_one_as)).to eq "a"*41
           hello = @braille_converter.convert("hello")
           expect(@english_converter.convert(hello)).to eq "hello"
