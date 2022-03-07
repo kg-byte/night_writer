@@ -4,7 +4,6 @@ require_relative 'braille_converter'
 class NightRunner
   def initialize
     @input = ''
-    @type = ''
   end
 
   def read
