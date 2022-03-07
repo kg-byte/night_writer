@@ -3,7 +3,7 @@
 Night Writer is the Solo-project in Turing Mod 1 designed to translate between English and braille letters.
 
 ## Features included
-1. Iteration 1-3 in [Night Writer Page](https://backend.turing.edu/module1/projects/night_writer/)
+1. Iteration 1-3 complete in [Night Writer Interaction Pattern](https://backend.turing.edu/module1/projects/night_writer/)
 2. Iteration 4 features included: 
      Support Capitalization
      Support Numers
