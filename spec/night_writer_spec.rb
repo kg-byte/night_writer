@@ -91,8 +91,6 @@ RSpec.describe 'night_writer' do
 
         it 'can add cap switch to cap letters' do
           expect(@braille_converter.capitalization("ABC")).to eq "^a^b^c"
-
-
         end
 
         xit 'can translate numbers to braille' do
@@ -102,9 +100,9 @@ RSpec.describe 'night_writer' do
 
       end
       describe EnglishConverter do
-        xit 'can translate cap letters to english' do
-          
-
+        it 'can translate cap letters to english' do
+          cap_abc = @braille_converter.convert("ABC")
+          expect(@english_converter.convert(cap_abc)).to eq "ABC"
 
         end
 
