@@ -18,7 +18,6 @@ RSpec.describe 'night_writer' do
             expect(@braille_converter.translate(["hello"])).to eq  [["0.", "00", ".."], ["0.", ".0", ".."], ["0.", "0.", "0."], ["0.", "0.", "0."], ["0.", ".0", "0."]]
           end
 
-
           it 'cuts input every 40 characters' do
             string = "a"*50
             cut_lines = @braille_converter.cut_every_40_chars(string)

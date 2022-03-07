@@ -1,6 +1,8 @@
 require_relative 'library'
+require_relative 'formatable'
 class BrailleConverter
 attr_reader :dictionary
+    include Formatable
     def initialize
       @dictionary = Library.dictionary
     end
@@ -17,14 +19,14 @@ attr_reader :dictionary
     end
 
 
-    def cut_every_40_chars(input)
-      if input.length > 40
-        reformated_eng = input.chars.each_slice(40).map(&:join)
-      else
-        reformated_eng = [input]
-      end
-      reformated_eng
-    end
+    # def cut_every_40_chars(input)
+    #   if input.length > 40
+    #     reformated_eng = input.chars.each_slice(40).map(&:join)
+    #   else
+    #     reformated_eng = [input]
+    #   end
+    #   reformated_eng
+    # end
 
 
     def convert(eng_message)
@@ -35,29 +37,27 @@ attr_reader :dictionary
       else
         output = output_braille_lines(translated_braille)
       end
-      # require 'pry'; binding.pry
       output.join
     end
 
-    def output_braille_one_line(line)
-      lines = Array.new
-      lines[0] = line.flat_map{|letter|  letter[0]}.join
-      lines[1] = line.flat_map{|letter|  letter[1]}.join
-      lines[2] = line.flat_map{|letter|  letter[2]}.join 
-      lines
-    end
+    # def output_braille_one_line(line)
+    #   lines = Array.new
+    #   lines[0] = line.flat_map{|letter|  letter[0]}.join
+    #   lines[1] = line.flat_map{|letter|  letter[1]}.join
+    #   lines[2] = line.flat_map{|letter|  letter[2]}.join
+    #   lines
+    # end
 
-    def output_braille_lines(lines)
-      multi_lines = Array.new
-      i = 0
-      lines.each {|line|
-        i
-        multi_lines[i] = [line.flat_map{|letter|  letter[0]}.join+"\n",
-                          line.flat_map{|letter|  letter[1]}.join+"\n",
-                          line.flat_map{|letter|  letter[2]}.join+"\n"]
-        i += 1
-      }
-      # require 'pry'; binding.pry
-      multi_lines
-    end
+    # def output_braille_lines(lines)
+    #   multi_lines = Array.new
+    #   i = 0
+    #   lines.each {|line|
+    #     i
+    #     multi_lines[i] = [line.flat_map{|letter|  letter[0]}.join+"\n",
+    #                       line.flat_map{|letter|  letter[1]}.join+"\n",
+    #                       line.flat_map{|letter|  letter[2]}.join+"\n"]
+    #     i += 1
+    #   }
+    #   multi_lines
+    # end
 end
