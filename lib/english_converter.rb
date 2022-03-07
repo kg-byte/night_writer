@@ -1,8 +1,36 @@
 require_relative 'library'
+require_relative 'formatable'
 
 class EnglishConverter
+    include Formatable
+
     def initialize
       @dictionary = Library.dictionary.invert
+      @index_key = Library.num_key.invert
+    end
+
+    def digitalize(input)
+      digit_index_minus_1 = (0..input.length).find_all{|i| input[i] == '='}
+      if digit_index_minus_1 != []
+        digit_index_minus_1.each do |index|
+          input[index+1] = @index_key[input[index+1]].to_s
+        end
+        input.delete('=')
+      else
+        input
+      end
+    end
+
+    def capitalization(input)
+      cap_index_minus_1 = (0..input.length).find_all{|i| input[i] == '^'}
+      if cap_index_minus_1 != []
+        cap_index_minus_1.each do |index|
+          input[index+1] = input[index+1].upcase
+        end
+        input.delete('^')
+      else
+        input
+      end
     end
 
     def translate(input)
@@ -15,37 +43,14 @@ class EnglishConverter
       letters.join
     end
 
-    def combine_braille_lines(input_lines)
-      if input_lines.length > 3
-        combined_braille = []
-        i = 0
-        until i == input_lines.length - 3 do
-        combined_braille << input_lines[i]+input_lines[i+3]
-        i += 1
-        end
-      else
-        line_length = input_lines[0].length / 3
-        combined_braille = input_lines[0].chars.each_slice(line_length).map(&:join)
-      end
-      combined_braille
-    end
 
     def convert(braille_message)
       braille_message = braille_message.split("\n")
       combined_braille = combine_braille_lines(braille_message)
       regrouped_braille = regroup(combined_braille)
       translated_english = translate(regrouped_braille)
+      capitalized = capitalization(translated_english)
+      digitalized = digitalize(capitalized)
     end
 
-    def regroup(input)
-      i = 0
-      regrouped_braille = []
-      divided_lines = input.map {|line| line.chars.each_slice(2).map(&:join)}
-      until i == divided_lines[0].length do
-        regrouped_braille << divided_lines.map{|line| line[i]}
-        i+=1
-      end
-      regrouped_braille
-      end
-
-    end
+end

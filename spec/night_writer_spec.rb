@@ -18,7 +18,6 @@ RSpec.describe 'night_writer' do
             expect(@braille_converter.translate(["hello"])).to eq  [["0.", "00", ".."], ["0.", ".0", ".."], ["0.", "0.", "0."], ["0.", "0.", "0."], ["0.", ".0", "0."]]
           end
 
-
           it 'cuts input every 40 characters' do
             string = "a"*50
             cut_lines = @braille_converter.cut_every_40_chars(string)
@@ -44,8 +43,8 @@ RSpec.describe 'night_writer' do
           end
 
           it 'can convert a letter/word/sentence' do
-            expect(@braille_converter.convert("a")).to eq  "0....."
-            expect(@braille_converter.convert("hello!")).to eq "0.0.0.0.0...00.00.0..000....0.0.0.0."
+            expect(@braille_converter.convert("a")).to eq  "0.\n..\n..\n"
+            expect(@braille_converter.convert("hello")).to eq "0.0.0.0.0.\n00.00.0..0\n....0.0.0.\n"
             expect(@braille_converter.convert("a"*41).length).to eq 252
           end
         end
@@ -80,8 +79,36 @@ RSpec.describe 'night_writer' do
           expect(@english_converter.convert(forty_one_as)).to eq "a"*41
           hello = @braille_converter.convert("hello")
           expect(@english_converter.convert(hello)).to eq "hello"
+        end
+      end
 
+    context 'iteration 4'
+    before(:each) do
+      @english_converter = EnglishConverter.new
+      @braille_converter = BrailleConverter.new
+    end
+      describe BrailleConverter do
 
+        it 'can add cap switch to cap letters' do
+          expect(@braille_converter.de_capitalization("ABC")).to eq "^a^b^c"
+        end
+
+        it 'can translate numbers to braille' do
+          expect(@braille_converter.de_digitalize('123')).to eq '=a=b=c'
+
+        end
+
+      end
+      describe EnglishConverter do
+        it 'can translate cap letters to english' do
+          cap_abc = @braille_converter.convert("ABC")
+          expect(@english_converter.convert(cap_abc)).to eq "ABC"
+
+        end
+
+        it 'can translate numbers to english' do
+          word_with_num = @braille_converter.de_digitalize("2 is greater than 1")
+          expect(@english_converter.digitalize(word_with_num)).to eq "2 is greater than 1"
         end
 
 
