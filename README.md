@@ -7,7 +7,7 @@ Night Writer is the Solo-project in Turing Mod 1 designed to translate between E
 2. Iteration 4 features included: 
      Support Capitalization
      Support Numers
-3. A module 'Formatable' is implemented to organize/shorten the two 'converter' classes.
+3. A module `Formatable` is implemented to organize/shorten the two `converter` classes.
 
 ## Local Setup
 [simplecov](https://github.com/simplecov-ruby/simplecov) installation needed to check % coverage.
