@@ -12,7 +12,6 @@ class BrailleConverter
     def de_digitalize(input)
       output = input.each_char.map{|letter|
       if '0123456789'.include?(letter)
-        # require 'pry'; binding.pry
         letter = '=' + @num_key[letter.to_i]
       else
         letter = letter
@@ -28,7 +27,7 @@ class BrailleConverter
           else
             letter = letter
           end
-        }
+                                    }
        output.join
     end
 
@@ -40,7 +39,6 @@ class BrailleConverter
         letters = input[0].split('')
         braille = letters.map {|letter| @dictionary[letter.to_sym]}
       end
-      braille
     end
 
     def convert(eng_message)
