@@ -7,6 +7,17 @@ attr_reader :dictionary
       @dictionary = Library.dictionary
     end
 
+    def capitalization(input)
+        output = input.each_char.map{|letter|
+          if letter == letter.upcase
+            letter = "^" + letter.downcase
+          else
+            letter = letter
+          end
+        }
+       output.join
+    end
+
     def translate(input)
       if input.count > 1
         lines = input.map{|line| line.split('')}
@@ -19,45 +30,19 @@ attr_reader :dictionary
     end
 
 
-    # def cut_every_40_chars(input)
-    #   if input.length > 40
-    #     reformated_eng = input.chars.each_slice(40).map(&:join)
-    #   else
-    #     reformated_eng = [input]
-    #   end
-    #   reformated_eng
-    # end
-
 
     def convert(eng_message)
-      reformated_eng = cut_every_40_chars(eng_message.gsub("\n", ''))
+      cap_transformed = capitalization(eng_message.gsub("\n", ''))
+      reformated_eng = cut_every_40_chars(cap_transformed)
       translated_braille = translate(reformated_eng)
       if reformated_eng.count == 1
-        output = output_braille_one_line(translated_braille)
+        lines = output_braille_one_line(translated_braille)
+        output = lines.map{|line| line + "\n"}
       else
         output = output_braille_lines(translated_braille)
       end
       output.join
+      # require 'pry'; binding.pry
     end
 
-    # def output_braille_one_line(line)
-    #   lines = Array.new
-    #   lines[0] = line.flat_map{|letter|  letter[0]}.join
-    #   lines[1] = line.flat_map{|letter|  letter[1]}.join
-    #   lines[2] = line.flat_map{|letter|  letter[2]}.join
-    #   lines
-    # end
-
-    # def output_braille_lines(lines)
-    #   multi_lines = Array.new
-    #   i = 0
-    #   lines.each {|line|
-    #     i
-    #     multi_lines[i] = [line.flat_map{|letter|  letter[0]}.join+"\n",
-    #                       line.flat_map{|letter|  letter[1]}.join+"\n",
-    #                       line.flat_map{|letter|  letter[2]}.join+"\n"]
-    #     i += 1
-    #   }
-    #   multi_lines
-    # end
 end

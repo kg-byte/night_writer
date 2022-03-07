@@ -7,6 +7,8 @@ class EnglishConverter
       @dictionary = Library.dictionary.invert
     end
 
+
+
     def translate(input)
       letters = []
       if input.all? {|input| input.class == String}
@@ -16,7 +18,6 @@ class EnglishConverter
       end
       letters.join
     end
-
 
 
     def convert(braille_message)
