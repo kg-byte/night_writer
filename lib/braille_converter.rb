@@ -5,9 +5,20 @@ attr_reader :dictionary
     include Formatable
     def initialize
       @dictionary = Library.dictionary
+      @num_key = Library.num_key
     end
 
-    def capitalization(input)
+    def de_degitalize(input)
+      output = input.each_char.map{|letter|
+      if '0123456789'.include?(letter)
+        # require 'pry'; binding.pry
+        letter = '=' + @num_key[letter.to_i]
+      else
+        letter = letter
+      end }
+      output.join
+    end
+    def de_capitalization(input)
       special_letters = ["^", "=", " ", "!", "'", ",", "-", ".", "?"]
         output = input.each_char.map{|letter|
           if letter == letter.upcase && !special_letters.include?(letter)
@@ -33,7 +44,8 @@ attr_reader :dictionary
 
 
     def convert(eng_message)
-      cap_transformed = capitalization(eng_message.gsub("\n", ''))
+      digit_transformed = de_degitalize(eng_message.gsub("\n", ''))
+      cap_transformed = de_capitalization(digit_transformed)
       reformated_eng = cut_every_40_chars(cap_transformed)
       translated_braille = translate(reformated_eng)
       if reformated_eng.count == 1
