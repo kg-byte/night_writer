@@ -8,6 +8,7 @@ Night Writer is the Solo-project in Turing Mod 1 designed to translate between E
      Support Capitalization
      Support Numers
 3. A module `Formatable` is implemented to organize/shorten the two `converter` classes.
+4. 100 % code tested in all classes tested.
 
 ## Local Setup
 [simplecov](https://github.com/simplecov-ruby/simplecov) installation is needed to check % code tested.
