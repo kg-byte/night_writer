@@ -8,8 +8,9 @@ attr_reader :dictionary
     end
 
     def capitalization(input)
+      special_letters = ["^", "=", " ", "!", "'", ",", "-", ".", "?"]
         output = input.each_char.map{|letter|
-          if letter == letter.upcase
+          if letter == letter.upcase && !special_letters.include?(letter)
             letter = "^" + letter.downcase
           else
             letter = letter
