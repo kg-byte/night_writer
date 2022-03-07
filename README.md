@@ -2,17 +2,17 @@
 Final Solo-project in Turing Mod 1 designed to translate between English and braille letters.
 
 ## Features included
- ### Iteration 1-3 in [Night Writer Page](https://backend.turing.edu/module1/projects/night_writer/)
- ### Iteration 4 features included: 
+1. Iteration 1-3 in [Night Writer Page](https://backend.turing.edu/module1/projects/night_writer/)
+2. Iteration 4 features included: 
      Support Capitalization
      Support Numers
- ### A module 'Formatable' is implemented to organize/shorten the two 'converter' classes.
+3. A module 'Formatable' is implemented to organize/shorten the two 'converter' classes.
 
 
 
 
 ## Local Setup
-simplecov(https://github.com/simplecov-ruby/simplecov) installation needed to check % coverage.
+[simplecov](https://github.com/simplecov-ruby/simplecov) installation needed to check % coverage.
 
 ## Running the tests
 Run rspec to runt the local tests.
