@@ -1,5 +1,6 @@
 # Night Writer
-Final Solo-project in Turing Mod 1 designed to translate between English and braille letters.
+## Description
+Night Writer is the Solo-project in Turing Mod 1 designed to translate between English and braille letters.
 
 ## Features included
 1. Iteration 1-3 in [Night Writer Page](https://backend.turing.edu/module1/projects/night_writer/)
@@ -7,9 +8,6 @@ Final Solo-project in Turing Mod 1 designed to translate between English and bra
      Support Capitalization
      Support Numers
 3. A module 'Formatable' is implemented to organize/shorten the two 'converter' classes.
-
-
-
 
 ## Local Setup
 [simplecov](https://github.com/simplecov-ruby/simplecov) installation needed to check % coverage.
