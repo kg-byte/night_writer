@@ -75,8 +75,8 @@ RSpec.describe 'night_writer' do
 
 
         it 'can convert braille to english letters regardless of length' do
-          # forty_one_as = @braille_converter.convert("a"*41)
-          # expect(@english_converter.convert(forty_one_as)).to eq "a"*41
+          forty_one_as = @braille_converter.convert("a"*41)
+          expect(@english_converter.convert(forty_one_as)).to eq "a"*41
           hello = @braille_converter.convert("hello")
           expect(@english_converter.convert(hello)).to eq "hello"
         end
@@ -94,7 +94,7 @@ RSpec.describe 'night_writer' do
         end
 
         it 'can translate numbers to braille' do
-          expect(@braille_converter.de_degitalize('123')).to eq '=a=b=c'
+          expect(@braille_converter.de_digitalize('123')).to eq '=a=b=c'
 
         end
 
@@ -106,9 +106,9 @@ RSpec.describe 'night_writer' do
 
         end
 
-        xit 'can translate numbers to english' do
-
-
+        it 'can translate numbers to english' do
+          word_with_num = @braille_converter.de_digitalize("2 is greater than 1")
+          expect(@english_converter.digitalize(word_with_num)).to eq "2 is greater than 1"
         end
 
 

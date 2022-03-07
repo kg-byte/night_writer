@@ -1,14 +1,15 @@
 require_relative 'library'
 require_relative 'formatable'
+
 class BrailleConverter
-attr_reader :dictionary
     include Formatable
+
     def initialize
       @dictionary = Library.dictionary
       @num_key = Library.num_key
     end
 
-    def de_degitalize(input)
+    def de_digitalize(input)
       output = input.each_char.map{|letter|
       if '0123456789'.include?(letter)
         # require 'pry'; binding.pry
@@ -18,6 +19,7 @@ attr_reader :dictionary
       end }
       output.join
     end
+
     def de_capitalization(input)
       special_letters = ["^", "=", " ", "!", "'", ",", "-", ".", "?"]
         output = input.each_char.map{|letter|
@@ -41,21 +43,17 @@ attr_reader :dictionary
       braille
     end
 
-
-
     def convert(eng_message)
-      digit_transformed = de_degitalize(eng_message.gsub("\n", ''))
+      digit_transformed = de_digitalize(eng_message.gsub("\n", ''))
       cap_transformed = de_capitalization(digit_transformed)
       reformated_eng = cut_every_40_chars(cap_transformed)
       translated_braille = translate(reformated_eng)
       if reformated_eng.count == 1
-        lines = output_braille_one_line(translated_braille)
-        output = lines.map{|line| line + "\n"}
+        output = output_braille_one_line(translated_braille)
       else
         output = output_braille_lines(translated_braille)
       end
       output.join
-      # require 'pry'; binding.pry
     end
 
 end

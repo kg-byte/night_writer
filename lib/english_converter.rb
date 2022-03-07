@@ -2,9 +2,23 @@ require_relative 'library'
 require_relative 'formatable'
 
 class EnglishConverter
-  include Formatable
+    include Formatable
+
     def initialize
       @dictionary = Library.dictionary.invert
+      @index_key = Library.num_key.invert
+    end
+
+    def digitalize(input)
+      digit_index_minus_1 = (0..input.length).find_all{|i| input[i] == '='}
+      if digit_index_minus_1 != []
+        digit_index_minus_1.each do |index|
+          input[index+1] = @index_key[input[index+1]].to_s
+        end
+        input.delete('=')
+      else
+        input
+      end
     end
 
     def capitalization(input)
@@ -36,7 +50,7 @@ class EnglishConverter
       regrouped_braille = regroup(combined_braille)
       translated_english = translate(regrouped_braille)
       capitalized = capitalization(translated_english)
+      digitalized = digitalize(capitalized)
     end
 
-
-    end
+end
