@@ -16,18 +16,21 @@ class EnglishConverter
     end
 
     def combine_braille_lines(input_lines)
-      if input_lines.length > 3
-        combined_braille = []
+      if input_lines.count > 3
+        combined_braille = %w[# # #]
+      iteration = input_lines.count / 3
         i = 0
-        until i == input_lines.length - 3 do
-        combined_braille << input_lines[i]+input_lines[i+3]
-        i += 1
-        end
+        iteration.times do
+        combined_braille[0] += input_lines[i]
+        combined_braille[1] += input_lines[i+1]
+        combined_braille[2] += input_lines[i+2]
+        i += 3
+                          end
+        combined_braille.map{|row| row.delete("#")}
       else
         line_length = input_lines[0].length / 3
         combined_braille = input_lines[0].chars.each_slice(line_length).map(&:join)
       end
-      combined_braille
     end
 
     def convert(braille_message)
@@ -35,6 +38,7 @@ class EnglishConverter
       combined_braille = combine_braille_lines(braille_message)
       regrouped_braille = regroup(combined_braille)
       translated_english = translate(regrouped_braille)
+      # require 'pry'; binding.pry
     end
 
     def regroup(input)

@@ -45,7 +45,7 @@ RSpec.describe 'night_writer' do
 
           it 'can convert a letter/word/sentence' do
             expect(@braille_converter.convert("a")).to eq  "0....."
-            expect(@braille_converter.convert("hello!")).to eq "0.0.0.0.0...00.00.0..000....0.0.0.0."
+            expect(@braille_converter.convert("hello")).to eq "0.0.0.0.0.00.00.0..0....0.0.0."
             expect(@braille_converter.convert("a"*41).length).to eq 252
           end
         end
@@ -83,6 +83,7 @@ RSpec.describe 'night_writer' do
 
 
         end
+
 
 
       end
